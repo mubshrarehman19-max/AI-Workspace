@@ -1,0 +1,3 @@
+services:
+  - {type: web, name: aiws-api, runtime: python, buildCommand: pip install -r requirements.txt, startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT, envVars: [{key: OPENAI_API_KEY, sync: false}, {key: DB_PATH, value: /var/data/workspace.db}]}
+  - {type: web, name: aiws-ui, runtime: python, buildCommand: pip install -r requirements.txt streamlit, startCommand: streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0, envVars: [{key: API_URL, sync: false}]}
